@@ -1,0 +1,38 @@
+﻿CREATE TABLE `pages` (
+   `id` int(11) not null auto_increment,
+   `subject_id` int(11) not null,
+   `menu_name` varchar(250) not null,
+   `position` int(11) not null,
+   `visible` tinyint(4) not null,
+   `content` text not null,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=34;
+
+INSERT INTO `pages` (`id`, `subject_id`, `menu_name`, `position`, `visible`, `content`) VALUES 
+('7', '3', 'Artificial Intelligence', '1', '1', 'this is my life, i love it...........................'),
+('8', '3', 'Biometrics', '1', '1', 'this is my life'),
+('9', '4', 'ASP', '2', '1', 'my first ASP'),
+('10', '3', 'Communication', '3', '1', 'this is my communication services'),
+('11', '3', 'Computer Graphics', '4', '1', 'this is my My graphics'),
+('12', '3', 'Computer History', '5', '1', 'this is my computer History'),
+('13', '3', 'Data Mining', '6', '1', 'this is my data mining'),
+('14', '3', 'Distributed Systems', '7', '1', 'this is my life'),
+('15', '3', 'e-learning', '8', '1', 'this is my e-learning centre'),
+('16', '3', 'Game Technology', '9', '1', 'this is my game technology'),
+('17', '3', 'General Computing', '10', '1', 'this is my computing'),
+('18', '3', 'Hardware', '11', '1', 'this is my hardware'),
+('19', '3', 'Information Technology', '12', '1', 'this is my info technology'),
+('20', '3', 'Database Design', '13', '1', 'this is my database design'),
+('21', '4', 'Ajax', '1', '1', 'my first Ajax'),
+('22', '4', 'Java', '3', '1', 'my first Java'),
+('23', '4', 'PHP', '4', '1', 'my first PHP'),
+('24', '4', 'JavaScript', '5', '1', 'my first js'),
+('25', '4', 'Objective C', '1', '1', 'my first Objective C'),
+('26', '4', 'C++', '7', '1', 'my first C++'),
+('27', '4', 'Pascal', '8', '1', 'my first Pascal'),
+('28', '4', 'Fortran', '9', '1', 'my first Fortran'),
+('29', '4', 'HTML', '10', '1', 'my first HTML'),
+('30', '4', 'CSS', '11', '1', 'my first CSS'),
+('31', '3', 'Web Technologies', '14', '1', 'this is my life, i love it'),
+('32', '3', 'Projects', '15', '1', 'These are our projects'),
+('33', '3', 'Testing', '16', '1', 'this is testing');

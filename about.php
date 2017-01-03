@@ -1,0 +1,335 @@
+<?php require_once("inc/session.php"); ?>
+<?php require_once("inc/connection.php"); ?>
+<?php require_once("inc/functions.php"); ?>
+<?php include_once("inc/form_function.php"); ?>
+<?php
+if(isset($_POST['updateContent'])){
+	//Form has been submitted
+		//initialize an array to hold our errors
+		$errors = array();
+		
+		//perform validation on the form
+	$required_fields = array('content' );
+	$errors =  array_merge($errors, check_required_fields($required_fields));
+	
+	$username = $_SESSION['username'];
+	$content=htmlentities(trim(mysql_prep($_POST['content'])));
+	$page = $_POST['page'];
+	//Database submission only proceeds if there were NO errors
+		if (empty($errors)){
+		global $connection;	
+		$query="UPDATE about SET username = '{$username}', content = '{$content}' WHERE page = '{$page}' LIMIT 1";
+		$result = mysqli_query( $connection,$query);
+        confirm_query($result);
+		//test to see if the update occured
+		if($result){
+	
+	$message = 'Updated Successfully!';	
+			}else{
+				//failed
+			$message = "The Update failed";
+			$message .= "<br />" . mysqli_error();
+				}
+		}else{
+			//Errors occured
+			if(count($errors) == 1){
+				$message = "There was 1 error in the form.";
+			}else{
+		$message = "There were " . count($errors). " errors in the form";
+				}
+			}
+	}
+	
+	if(isset($_POST['submitHelp'])){
+	//Form has been submitted
+		//initialize an array to hold our errors
+		$errors = array();
+		
+		//perform validation on the form
+	$required_fields = array('name','email','comment' );
+	$errors =  array_merge($errors, check_required_fields($required_fields));
+	
+	$name=htmlentities(trim(mysql_prep($_POST['name'])));
+	$email=htmlentities(trim(mysql_prep($_POST['email'])));
+	$comment=htmlentities(trim(mysql_prep($_POST['comment'])));
+	//Database submission only proceeds if there were NO errors
+		if (empty($errors)){
+		global $connection;	
+		$query="INSERT INTO help SET name = '{$name}', email = '{$email}', comment = '{$comment}'";
+		$result = mysqli_query( $connection,$query);
+        confirm_query($result);
+		//test to see if the update occured
+		if($result){
+	
+	$message = 'Message sent Successfully!';	
+			}else{
+				//failed
+			$message = "Message sending failed";
+			$message .= "<br />" . mysqli_error();
+				}
+		}else{
+			//Errors occured
+			if(count($errors) == 1){
+				$message = "There was 1 error in the form.";
+			}else{
+		$message = "There were " . count($errors). " errors in the form";
+				}
+			}
+	}
+    ?>
+	<?php include_once('inc/developer.php'); ?>
+<?php find_selected_page(); ?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ABOUT US || CSC FUNAAB</title>
+	<link rel="shortcut icon" href="images/logo.jpg" type="image">
+	<link rel="stylesheet" href="css/default.css" />
+  </head>
+  <body id="top">
+   <?php include_once('inc/headstyle.php'); ?>
+     <div id="wrapper">   
+        <div class="header">
+          <div class="logo">
+            <a href="index.php"><img src="images/logo.jpg" width="200px" height="100px" alt="logo" /></a>
+          </div>
+           <?php include_once('main_header.php'); ?>
+         <div class="search">  
+          <form method="post" action="result.php" id="searchbox">
+          <input type="search" name="search"  id="search" size="50" placeholder="Search Library"/>
+          <input type="submit" name="searchSubmit" id="searchSubmit" value="Search"/>
+          </form>
+          </div><!-- end search -->
+          <div class="clear"></div>
+        </div><!--header-->
+        <div id="main">
+        <div class="nav">
+        <ul>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="news_events.php">News & Events</a></li>
+          <li><a href="explore.php">Explore</a></li>
+          <li><a href="services.php">Services</a></li>
+          <li><a href="project.php">Projects</a></li>
+          <li><a href="developer.php">Contributors & Developers</a></li>
+        </ul>
+        </div><!--nav-->
+        <div class="category">
+           <div class="subjects">
+           <?php echo public_navigation($sel_subject,$sel_page); ?>
+            <?php if(isset($_SESSION['username'])){ ?>
+           <div class="editSide"><a href="new_subject.php">Add a new subject</a></div>
+           <?php } ?>
+       </div>
+       <?php if(isset($_SESSION['username'])){ ?>
+	        <div class="browse"> 
+       <p>Staff Activities</p>
+       </div>
+        <div class="editSide"><a href="editResource.php">Edit Resources</a></div>
+        <div class="editSide"><a href="editEvent.php">Edit Event</a></div>
+       <div class="editSide"><a href="content.php?action=editLogo">Edit Logo</a></div>
+       <div class="editSide"><a href="editNav.php">Edit Navigation</a></div>
+       <?php
+	   if($_SESSION['username'] == 'admin'){ ?>
+       <div class="editSide"><a href="editStaff.php">Edit Current Users</a></div>
+       <div class="editSide"><a href="newStaff.php">Add New User</a></div>
+	  <?php } else{?>
+      <div class="editSide"><a href="changePass.php?user=<?php echo $_SESSION['username']; ?>">Change Password</a></div>
+      <?php } ?>
+       <div class="editSide"><a href="timeout.php">Logout</a></div>
+			<?php }
+		   ?>
+        </div><!-- end category -->
+        <div class="section">
+          <div class="sel_page">
+      <?php 
+	  if(isset($_GET['action']) && $_GET['action'] == 'contact'){
+		  //get contact information
+		  $page = $_GET['action'];
+		  $query = "SELECT * FROM about WHERE page = '{$page}' LIMIT 1";
+		  $result_set = mysqli_query($query,$connection);
+		  confirm_query($result_set);
+		  
+		  $result = mysqli_fetch_array($result_set);
+		  echo nl2br($result['content']);
+		  ?>
+		  <br />
+		  <?php if(!empty($message)){ ?>
+		    <p class="notice"><i>Sent Successfully!</i></p>
+		 <?php }else{
+		  ?>
+          <p class="notice"><i>Please fill the form below to contact us</i></p>
+		  <?php } ?>
+		  <form action="about.php?action=contact" method="post" id="form">
+          
+          <table border="0" width="95%">
+          <tr><td><label>Name</label></td><td><input type="text" name="name"></td></tr>
+          <tr><td> <label>Email</label></td><td><input type="email" name="email" /></td></tr>
+          <tr><td colspan="2"><label>comment</label></td></tr>
+          <tr>
+           <td colspan="2"><textarea name="comment" cols="70" rows="20"></textarea></td>
+           </tr>
+          <tr><td><input type="submit" name="submitHelp" id="submit"></td></tr>
+          </table>
+          </form>
+          <?php
+          }else  if(isset($_GET['action']) && $_GET['action'] == 'editContact'){
+			  //edit contact information 
+			  $page = 'contact';
+		  $query = "SELECT * FROM about WHERE page = '{$page}' LIMIT 1";
+		  $result_set = mysqli_query($query,$connection);
+		  confirm_query($result_set);
+		  
+		  $result = mysqli_fetch_array($result_set);
+		  
+			   ?>
+			   <p class="notice"><i>Edit contact Information</i></p>
+			  <form action="about.php" method="post" id="form"><br />
+              <input type="hidden" name="page" value="contact" />
+              <textarea name="content" cols="60" rows="20"><?php echo $result['content']; ?></textarea><br />
+              <input type="submit" name="updateContent" id="submit" value="update">
+              </form>
+              <?php
+			  }else if(isset($_GET['action']) && $_GET['action'] == 'policy'){
+			  //get policy
+			   $page = $_GET['action'];
+		  $query = "SELECT * FROM about WHERE page = '{$page}' LIMIT 1";
+		  $result_set = mysqli_query($query,$connection);
+		  confirm_query($result_set);
+		  
+		  $result = mysqli_fetch_array($result_set);
+		  echo $result['content'];
+			
+			  }else  if(isset($_GET['action']) && $_GET['action'] == 'editPolicy'){
+				  //edit policy
+				   $page = 'policy';
+		  $query = "SELECT * FROM about WHERE page = '{$page}' LIMIT 1";
+		  $result_set = mysqli_query($query,$connection);
+		  confirm_query($result_set);
+		  
+		  $result = mysqli_fetch_array($result_set);
+		  
+			   ?>
+			   <p class="notice"><i>Edit Privacy Policy</i></p>
+			  <form action="about.php" method="post" id="form"><br />
+              <input type="hidden" name="page" value="policy" />
+              <textarea name="content" cols="60" rows="20"><?php echo $result['content']; ?></textarea><br />
+              <input type="submit" name="updateContent" id="submit" value="update">
+              </form>
+              <?php
+				  
+				  }else if(isset($_GET['action']) && $_GET['action'] == 'terms'){
+				  //get terms
+			 $page = $_GET['action'];
+		  $query = "SELECT * FROM about WHERE page = '{$page}' LIMIT 1";
+		  $result_set = mysqli_query($query,$connection);
+		  confirm_query($result_set);
+		  
+		  $result = mysqli_fetch_array($result_set);
+		  echo $result['content'];
+				  
+				  }else  if(isset($_GET['action']) && $_GET['action'] == 'editTerms'){
+					 //edit Terms 
+					  $page = 'terms';
+		  $query = "SELECT * FROM about WHERE page = '{$page}' LIMIT 1";
+		  $result_set = mysqli_query($query,$connection);
+		  confirm_query($result_set);
+		  
+		  $result = mysqli_fetch_array($result_set);
+		  
+			   ?>
+			   <p class="notice"><i>Edit Terms of Use</i></p>
+			  <form action="about.php" method="post" id="form"><br />
+              <input type="hidden" name="page" value="terms" />
+              <textarea name="content" cols="60" rows="20"><?php echo $result['content']; ?></textarea><br />
+              <input type="submit" name="updateContent" id="submit" value="update">
+              </form>
+              <?php
+					  }else  if(isset($_GET['action']) && $_GET['action'] == 'editAbout'){
+						  //edit about us
+						   $page = 'about';
+		  $query = "SELECT * FROM about WHERE page = '{$page}' LIMIT 1";
+		  $result_set = mysqli_query($query,$connection);
+		  confirm_query($result_set);
+		  
+		  $result = mysqli_fetch_array($result_set);
+		  
+			   ?>
+			  <form action="about.php" method="post" id="form"><br />
+              <input type="hidden" name="page" value="about" />
+              <textarea name="content" cols="60" rows="20"><?php echo $result['content']; ?></textarea><br />
+              <input type="submit" name="updateContent" id="submit" value="update">
+              </form>
+              <?php
+						  }else{
+					  //get about
+					 $page = 'about';
+		  $query = "SELECT * FROM about WHERE page = '{$page}' LIMIT 1";
+		  $result_set = mysqli_query($query,$connection);
+		  confirm_query($result_set);
+		  
+		  $result = mysqli_fetch_array($result_set);
+		  echo $result['content'];
+					  }
+	  ?>
+    </div><!--sel_page-->
+        </div><!---section-->
+        </div><!-- end main -->
+        
+       
+        <div class="aside">
+        
+        <div class="latestUpdate">
+          <h4>Latest News</h4>
+          <?php 
+		  $query = "SELECT * FROM news ORDER BY id DESC";
+		  $result_set = mysqli_query($query,$connection);
+		  confirm_query($result_set);
+		  for($count=0;$result=mysqli_fetch_array($result_set);$count++){
+			  
+		  ?>
+          
+          <div class="update"><img src="images/news_events/<?php echo $result['imgName'] ?>" width="50" height="50" alt="<?php echo $result['imgName'] ?>"> 
+          <a href="news_events.php?action=fullNews&id=<?php echo urlencode($result['id']); ?>"><?php echo $result['headline']; ?></a><br />
+		  <?php 
+		  $newslenght = str_word_count($result['news']);
+		  if($newslenght < 40){
+			  echo $result['news'];
+			  }else{
+				  echo substr($result['news'],0,200).'<a href="news_events.php?action=fullNews&id='.urlencode($result['id']).'"><i>...read more</i></a><br />';
+				  }
+			  
+			  
+		  ?>
+          
+          <div class="updater">
+          Updated By:<br /><a href="#"><?php echo $result['username']; ?></a></div>
+          
+          <div class="clear"></div>
+          </div>
+          
+          <?php 
+		  if($count == 4){
+		       break;
+		       }
+		  } 
+		   ?>
+          <div class="editSide"><a href="news_events.php">view all</a></div> 
+          
+        </div>
+        
+        <div class="latestUpdate">
+          <h4>Sponsored</h4>
+          <div class="update"> <a href="#">Java Progamming || 10th Edition by Deitel</a><br />
+          <img src="images/oijio.jpg" width="50" height="50" ><p class="updater">Updated By:<br /><a href="#"> Dr. Onashoga S.A</a></p>
+          
+          <div class="clear"></div>
+          </div>
+          
+        </div>
+        
+        </div><!---aside-->
+        <div class="clear"></div>
+       
+      </div><!--wrapper-->
+      
+      <?php include_once('inc/footer.php'); ?>

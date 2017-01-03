@@ -1,0 +1,238 @@
+--
+-- MySQL 5.5.8
+-- Thu, 31 Jul 2014 22:44:14 +0000
+--
+
+CREATE TABLE `about` (
+   `id` int(11) not null auto_increment,
+   `username` varchar(250) not null,
+   `page` varchar(20) not null,
+   `content` text not null,
+   `when` timestamp not null default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=5;
+
+INSERT INTO `about` (`id`, `username`, `page`, `content`, `when`) VALUES 
+('1', 'admin', 'about', 'You can place the tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags. The tag alert the browser program to begin interpreting all the text be to print, micro form, or other media), along with means for organizing, ......testing', '2014-07-22 21:14:48'),
+('2', 'admin', 'contact', 'contact us details....modified', '2014-07-22 21:11:58'),
+('3', 'admin', 'policy', 'policy comes here....testing', '2014-07-22 21:15:19'),
+('4', 'admin', 'terms', 'Terms right here...testing terms', '2014-07-22 21:15:40');
+
+CREATE TABLE `audio` (
+   `id` int(11) not null auto_increment,
+   `username` varchar(250) not null,
+   `title` text not null,
+   `author` text not null,
+   `category` text not null,
+   `audioName` text not null,
+   `description` text not null,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=4;
+
+INSERT INTO `audio` (`id`, `username`, `title`, `author`, `category`, `audioName`, `description`) VALUES 
+('1', 'admin', 'movie', 'me', 'Artificial Intelligence', 'joinbutton.wma', 'this is artificial intelligence audio'),
+('2', 'admin', 'bible', 'jesus', 'Artificial Intelligence', '28_Hosea009.mp3', 'this isn jesus'),
+('3', 'admin', 'thidhfg', 'k;lhdgf', 'Artificial Intelligence', 'NOT ALLOW PEOPLE TO LEBEL YOU.mp3', 'gjkjhjghhkjhgjnnm jkhhjj');
+
+CREATE TABLE `document` (
+   `username` varchar(250) not null,
+   `ISBN` varchar(250) not null,
+   `title` text not null,
+   `author` text not null,
+   `docName` varchar(250) not null,
+   `category` varchar(250) not null,
+   `description` text not null,
+   PRIMARY KEY (`ISBN`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `document` (`username`, `ISBN`, `title`, `author`, `docName`, `category`, `description`) VALUES 
+('admin', '12345678', 'art', 'me', 'jobs_board.pdf', 'Game Technology', 'this is my book'),
+('admin', '23455', 'me and i', 'holumyn', 'Batch.pdf', 'Artificial Intelligence', 'my book ever green'),
+('admin', '654322', 'libray', 'me', 'digital_library.jpg', 'Game Technology', 'this s librsrt'),
+('admin', '89326894', 'this is seriu', 'holumyn', 'Java How To Program, Ninth Edition, Deitel &amp; Deitel.pdf', 'Artificial Intelligence', 'i love programming');
+
+CREATE TABLE `events` (
+   `id` int(11) not null auto_increment,
+   `username` varchar(250) not null,
+   `title` text not null,
+   `eventImg` text not null,
+   `description` text not null,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=6;
+
+INSERT INTO `events` (`id`, `username`, `title`, `eventImg`, `description`) VALUES 
+('1', '', 'nacoss', '', 'our week of code'),
+('2', 'admin', 'at last', 'news14401.jpg', 'victoryat last'),
+('3', 'admin', 'olamide the best', 'Snapshot_20140625_12.JPG', 'This is olamide the best lady in the department'),
+('4', 'admin', 'linked In the best professional website', 'logo_132x32_2.png', 'this is linked in. &lt;a href=&quot;&quot; target=&quot;_blank&quot;&gt;Click&lt;/a&gt; to go to site.'),
+('5', 'holu', 'Penguins party on the beach tonight', 'Penguins.jpg', 'An electronic procurement system is also known as e-procurement. This term is used to describe software that allows purchasers to access supplier’s catalogs via the Internet, as well as accepting electronic invoices. The purchasers select their materials, indicate the accounts to be charged for the purchase, and create a purchase order in the accounting system. All procurement-related activity is completed in the electronic system, reducing paperwork and increasing efficiency.\r\nElectronic invoice processing allows selected companies to further streamline invoice review and approval. The data is then routed through a series of online approvals before being processed for payment in the accounting system. This type of procurement system is very popular in large firms, where procurement contracts are in place to manage spending activity. For these firms, the reduction in staff time for invoice processing provides an excellent return on investment.\r\n');
+
+CREATE TABLE `help` (
+   `id` int(11) not null auto_increment,
+   `name` varchar(250) not null,
+   `email` varchar(250) not null,
+   `comment` text not null,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=4;
+
+INSERT INTO `help` (`id`, `name`, `email`, `comment`) VALUES 
+('1', 'olu', 'noble2016@gmail.com', 'this is serious'),
+('2', 'olum', 'me@gmail.com', 'this isngreat'),
+('3', 'olum', 'me@gmail.com', 'this isngreat');
+
+CREATE TABLE `navigation_pages` (
+   `id` int(11) not null auto_increment,
+   `header` text not null,
+   `note` text not null,
+   `page` varchar(250) not null,
+   UNIQUE KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=13;
+
+INSERT INTO `navigation_pages` (`id`, `header`, `note`, `page`) VALUES 
+('1', 'Explore our resources', 'Access and Publishing in my hood. .  lol', 'explore'),
+('3', 'header 3', 'Discovery &amp; Delivery', ''),
+('4', 'header 4', 'this is header 4. thanks', ''),
+('5', 'header 5', 'his is great', ''),
+('9', 'i am the developer', 'this is the developer.....our project', 'developer'),
+('11', 'services 12', 'this is service 12', 'services'),
+('12', 'project 2', 'this is project 2', 'project');
+
+CREATE TABLE `news` (
+   `id` int(11) not null auto_increment,
+   `username` varchar(250) not null,
+   `headline` text not null,
+   `news` text not null,
+   `imgName` varchar(250) not null,
+   `date` varchar(250) not null,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=13;
+
+INSERT INTO `news` (`id`, `username`, `headline`, `news`, `imgName`, `date`) VALUES 
+('1', 'admin', 'The is the bigging of jklsdcjsjv', 'Life : Your life the way you\'ve always wanted to live it. Make new friends, meet people, and lots more... A JavaScript consists of JavaScript statements that are placed within the HTML tags in a web page. You can place the tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags. The tag alert the browser program to begin interpreting all the text between these tags as a script. So simple syntax of your JavaScript will be as follows. An electronic library (also referred to as digital library or digital repository) is a focused collection of digital objects that can include text, visual material, audio material, video material, stored as electronic media formats (as opposed to print, micro form, or other media), along with means for organizing, storing, and retrieving the files and media contained in the library collection. Digital libraries can vary immensely in size and scope, and can be maintained by individuals, organizations, or affiliated with established physical library buildings or institutions, or with academic institutions.[1] The electronic content may be stored locally, or accessed remotely via computer networks. An electronic library is a type of information retrieval system....holumyn', 'news1.jpg', ''),
+('2', 'admin', 'inthe dhflhjf sjklfhddsf jklswhfl kjofwhl', 'Life : Your life the way you\'ve always wanted to live it. Make new friends, meet people, and lots more... A JavaScript consists of JavaScript statements that are placed within the HTML tags in a web page. You can place the tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags. The tag alert the browser program to begin interpreting all the text between these tags as a script. So simple syntax of your JavaScript will be as follows. An electronic library (also referred to as digital library or donic library is a type of information retr', 'news2.jpg', ''),
+('3', 'holumyn', 'this is my news', 'my news is gud!!!!', 'news3.jpg', ''),
+('4', 'holumyn', 'desert', 'this is dersert', 'Desert.jpg', ''),
+('5', 'holumyn', 'playing the chess game', 'NETWORKS\nDefinitions: An Interconnected collection of autonomous processors. A Network is a group of\ntwo or more computers connected to each other by a cable, over telephone lines or through\nwireless communication. When you are connected to a network, you can share resources on your\ncomputer such as documents, programs, printers, modems and use other resources from other\ncomputer. The key idea of a Network is that users need equal access to resources such as data,\nbut they do not necessarily have to have equal computing power.\nLANs, WANs and ‘Client Server” concepts are perhaps the most important trend in modern\ncomputing.\nThere are two types of Networks\n&amp;#61623; LOCAL AREA NETWORK (LAN)\n&amp;#61623; WIDE AREA NETWORK (WAN)\nLOCAL AREA NETWORK (LAN)\nDefinition: A network of computers located in a single building or an a single site.\nA LAN may also include a Bridge which is a connection to another similar LAN and a Gateway\nwhich is a connection to a different types of network outside the LAN.\nWIDE AREA NETWORS (WANs)\n- Network on a number of sites, perhaps on a wide geographical scale.\n- WANs often use minicomputers or mainframe as the “pump” that keep the data messages\ncirculating, whereas shorter distance LANs normally use PCs for thin task.\nAirlines are a typical WAN network.\nDIFFERENCES BETWEEN LANs AND WANs\n- The geographical area covered by WANs network is greater, not limited to a single building or\nsite.\n- WANs will send data over telecommunication links, and so will need MODEMS. LANs uses\ndirect cables only for transmitting data.\n- WANs will often use a lager computer a larger computer as a file serve.', 'news1162.jpg', ''),
+('6', 'holumyn', 'Library shelf, the best in the world', 'A client –server system allow computer power to be distributed to where it is most needed.\n- A client is a machine which requests a service, e.g. A PC running a spreadsheet application\nwhich the user whishes to print out.\n- A server is a machine which is dedicated to providing a particular function or services\nrequested by a client\n- Servers include file servers, print servers, e-mail servers and LAN servers.\n- The servers provide services such as shared printers, communication links, special-purpose\nprocessing and database storage.\nBENEFIT\n- It reduces network communications costs,\n- It allows the central computer to be used for administrator tasks such as network management.\n- The technological flexibility allows the use of sophisticated applications such as multimedia\nand document image processing (DIP).\nORGANISATION OF NETWORK (NETWORK TOPOLOLIES)\nDefinition: The physical arrangement of nodes in a Network.\n- A Node is any device connected to a Network, it can be a computer, or a peripheral device\nsuch as a printer.\n- Basically, there are four types of LAN system configuration:\nhttp://www.unaab.edu.ng\n* BUS NETWORK *STAR NETWORK\n*RING NETWORK * TREE NETWORK\nBUS NETWORK\n- Messages are sent out from one point along a single communication channel, and the\nmessages are received by other connected machines. Machines only receive messages which\ncontain their unique identifying code.\nRING NETWORK\n-The cable and computer are joined in a ring. There may or may not be a server.\n- Data transmission is normally in one direction only; each interface only copies the data and\npasses it to its own device if it recognize the packets destination as its own.', 'news2510.jpg', ''),
+('7', 'holumyn', 'HIERARCHICAL NETWORK (TREE NETWORK)', 'Hierarchical Network consists of nodes organised like a family tree. The top node is a central\ncomputer that is connected to several other nodes which may also be computers. Each of these\nnodes may be connected to several other nodes.\n- Large-scale processing is done by a mainframe, or Mini-computer, and lower-level processing\nby mini computers or micro-computers\nLANS Success is attributed to\n&amp;#61607; Personal computers of sufficient power and related software e.g. UNIIX\n&amp;#61607; Availability of Network at a fairly low price.', 'publications.jpg', ''),
+('8', 'admin', 'My app is ready to be deployed', 'This is a very beautiful application developed for the department of computer science federal university of Agriculture,Abeokuta during my stay in the university....i love this app cos it is outstanding...Keepup this great work my fellow nacossite..#PEACE!!!', 'education_careers.jpg', ''),
+('9', 'admin', 'facebook: the leading social network', 'facebook is the leading social network', 'fb.png', ''),
+('10', 'holu', 'This is my house in miami', 'An electronic procurement system is also known as e-procurement. This term is used to describe software that allows purchasers to access supplier’s catalogs via the Internet, as well as accepting electronic invoices. The purchasers select their materials, indicate the accounts to be charged for the purchase, and create a purchase order in the accounting system. All procurement-related activity is completed in the electronic system, reducing paperwork and increasing efficiency.\r\nElectronic invoice processing allows selected companies to further streamline invoice review and approval. The data is then routed through a series of online approvals before being processed for payment in the accounting system. This type of procurement system is very popular in large firms, where procurement contracts are in place to manage spending activity. For these firms, the reduction in staff time for invoice processing provides an excellent return on investment.\r\n', 'Lighthouse.jpg', 'Jul 15 2014'),
+('11', 'admin', 'nice pix baby', 'i love this', '300x300(12).jpg', 'Jul 31,2014'),
+('12', 'admin', 'beautifull people', 'beautiful people ......', '300x300(26).jpg', 'Jul 31,2014');
+
+CREATE TABLE `pages` (
+   `id` int(11) not null auto_increment,
+   `subject_id` int(11) not null,
+   `menu_name` varchar(250) not null,
+   `position` int(11) not null,
+   `visible` tinyint(4) not null,
+   `content` text not null,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=34;
+
+INSERT INTO `pages` (`id`, `subject_id`, `menu_name`, `position`, `visible`, `content`) VALUES 
+('7', '3', 'Artificial Intelligence', '1', '1', 'this is my life, i love it...........................'),
+('8', '3', 'Biometrics', '1', '1', 'this is my life'),
+('9', '4', 'ASP', '2', '1', 'my first ASP'),
+('10', '3', 'Communication', '3', '1', 'this is my communication services'),
+('11', '3', 'Computer Graphics', '4', '1', 'this is my My graphics'),
+('12', '3', 'Computer History', '5', '1', 'this is my computer History'),
+('13', '3', 'Data Mining', '6', '1', 'this is my data mining'),
+('14', '3', 'Distributed Systems', '7', '1', 'this is my life'),
+('15', '3', 'e-learning', '8', '1', 'this is my e-learning centre'),
+('16', '3', 'Game Technology', '9', '1', 'this is my game technology'),
+('17', '3', 'General Computing', '10', '1', 'this is my computing'),
+('18', '3', 'Hardware', '11', '1', 'this is my hardware'),
+('19', '3', 'Information Technology', '12', '1', 'this is my info technology'),
+('20', '3', 'Database Design', '13', '1', 'this is my database design'),
+('21', '4', 'Ajax', '1', '1', 'my first Ajax'),
+('22', '4', 'Java', '3', '1', 'my first Java'),
+('23', '4', 'PHP', '4', '1', 'my first PHP'),
+('24', '4', 'JavaScript', '5', '1', 'my first js'),
+('25', '4', 'Objective C', '1', '1', 'my first Objective C'),
+('26', '4', 'C++', '7', '1', 'my first C++'),
+('27', '4', 'Pascal', '8', '1', 'my first Pascal'),
+('28', '4', 'Fortran', '9', '1', 'my first Fortran'),
+('29', '4', 'HTML', '10', '1', 'my first HTML'),
+('30', '4', 'CSS', '11', '1', 'my first CSS'),
+('31', '3', 'Web Technologies', '14', '1', 'this is my life, i love it'),
+('32', '3', 'Projects', '15', '1', 'These are our projects'),
+('33', '3', 'Testing', '16', '1', 'this is testing');
+
+CREATE TABLE `project` (
+   `id` int(11) not null auto_increment,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+-- [Table `project` is empty]
+
+CREATE TABLE `resource` (
+   `id` int(11) not null auto_increment,
+   `username` varchar(250) not null,
+   `resourceInfo` text not null,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=6;
+
+INSERT INTO `resource` (`id`, `username`, `resourceInfo`) VALUES 
+('1', 'admin', 'This is the real thing'),
+('2', 'admin', 'Members Subscribe to the IEEE Computer Society Digital Library.'),
+('3', 'admin', 'Non Members: Free access to abstracts and tables of contents of all Digital Library.'),
+('4', 'admin', 'Also, purchase individual articles and papers.');
+
+CREATE TABLE `staff` (
+   `username` varchar(250) not null,
+   `password` varchar(40) not null,
+   `reg_date` timestamp not null default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+   PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `staff` (`username`, `password`, `reg_date`) VALUES 
+('admin', '7018d9174fb00aaa4b853b352d90b923967ab4c7', '2014-07-31 22:48:14'),
+('holumyn', '8cb2237d0679ca88db6464eac60da96345513964', '2014-05-23 22:20:24'),
+('iyanu', '8cb2237d0679ca88db6464eac60da96345513964', '2014-07-22 13:09:12'),
+('shaddy', '8cb2237d0679ca88db6464eac60da96345513964', '2014-07-15 21:16:43');
+
+CREATE TABLE `staff_monitor` (
+   `username` varchar(250) not null,
+   `timestamp` timestamp not null default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+   PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- [Table `staff_monitor` is empty]
+
+CREATE TABLE `subjects` (
+   `id` int(11) not null auto_increment,
+   `menu_name` varchar(250) not null,
+   `position` int(11) not null,
+   `visible` tinyint(4) not null,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=6;
+
+INSERT INTO `subjects` (`id`, `menu_name`, `position`, `visible`) VALUES 
+('3', 'Browse by:', '1', '1'),
+('4', 'Programming', '2', '1');
+
+CREATE TABLE `video` (
+   `id` int(11) not null auto_increment,
+   `username` varchar(250) not null,
+   `title` text not null,
+   `author` text not null,
+   `category` varchar(250) not null,
+   `videoName` text not null,
+   `description` text not null,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
+
+INSERT INTO `video` (`id`, `username`, `title`, `author`, `category`, `videoName`, `description`) VALUES 
+('1', 'admin', 'my vid', 'me', 'Biometrics', 'corporate_programs.mp4', 'my first vid');
+
+CREATE TABLE `welcomepage` (
+   `noteHead` varchar(250) not null,
+   `note` text not null,
+   `picture` varchar(250) not null,
+   `time` timestamp not null default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `welcomepage` (`noteHead`, `note`, `picture`, `time`) VALUES 
+('Department of Computer Science, FUNAAB.', 'You can place the  tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags.\r\nThe tag alert the browser program to begin interpreting all the text be to print, micro form, or other media), along with means for organizing,  You can place the  tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags.\r\nThe tag alert the browser program to begin interpreting all the text be to print, micro form, or other media), along with means for organizing, You can place the  tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags.\r\nThe tag alert the browser program to begin interpreting all the text be to print, micro form, or other media), along with means for organizing, You can place the  tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags.\r\nThe tag alert the browser program to begin interpreting all the text be to print, micro form, or other media), along with means for organizing,  You can place the  tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags.\r\nThe tag alert the browser program to begin interpreting all the text be to print, micro form, or other media), along with means for organizing, s', 'headOfLibrary74.jpg', '2014-07-22 22:39:37');

@@ -1,0 +1,9 @@
+﻿CREATE TABLE `welcomepage` (
+   `noteHead` varchar(250) not null,
+   `note` text not null,
+   `picture` varchar(250) not null,
+   `time` timestamp not null default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `welcomepage` (`noteHead`, `note`, `picture`, `time`) VALUES 
+('Department of Computer Science, FUNAAB.', 'You can place the  tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags.\r\nThe tag alert the browser program to begin interpreting all the text be to print, micro form, or other media), along with means for organizing,  You can place the  tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags.\r\nThe tag alert the browser program to begin interpreting all the text be to print, micro form, or other media), along with means for organizing, You can place the  tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags.\r\nThe tag alert the browser program to begin interpreting all the text be to print, micro form, or other media), along with means for organizing, You can place the  tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags.\r\nThe tag alert the browser program to begin interpreting all the text be to print, micro form, or other media), along with means for organizing,  You can place the  tag containing your JavaScript anywhere within you web page but it is preferred way to keep it within the tags.\r\nThe tag alert the browser program to begin interpreting all the text be to print, micro form, or other media), along with means for organizing, s', 'headOfLibrary74.jpg', '2014-07-22 22:39:37');
